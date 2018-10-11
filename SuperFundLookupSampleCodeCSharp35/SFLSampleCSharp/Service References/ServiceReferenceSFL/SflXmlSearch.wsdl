@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://superfundlookup.gov.au" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://superfundlookup.gov.au" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Super Fund Lookup search service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://superfundlookup.gov.au">
+      <s:element name="SearchByABN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="abn" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchByABNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SuperFundPayload" nillable="true" type="tns:FundPayload" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FundPayload">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Request" type="tns:IdentifierSearch" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:FundResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IdentifierSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Guid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ABN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FundResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UsageStatement" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateTimeRetrieved" type="s:dateTime" />
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="Exception" type="tns:ResponseException" />
+            <s:element minOccurs="0" maxOccurs="1" name="SuperannuationFund" type="tns:SuperannuationFund" />
+          </s:choice>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResponseException">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SuperannuationFund">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RecordLastUpdatedDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganisationName" type="tns:OrganisationName" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:Identifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="FundType" type="tns:FundType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="tns:Address" />
+          <s:element minOccurs="0" maxOccurs="1" name="ComplyingStatus" type="tns:ComplyingStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exception" type="tns:ResponseException" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrganisationName">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TypeCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Identifier">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdentifierStatus" type="tns:IdentifierStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IdentifierStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FundType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurposeCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Line2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SuburbLocalityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateTerritoryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ComplyingStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SuperFundPayload" nillable="true" type="tns:FundPayload" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SearchByABNSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchByABN" />
+  </wsdl:message>
+  <wsdl:message name="SearchByABNSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchByABNResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchByABNHttpGetIn">
+    <wsdl:part name="abn" type="s:string" />
+    <wsdl:part name="guid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchByABNHttpGetOut">
+    <wsdl:part name="Body" element="tns:SuperFundPayload" />
+  </wsdl:message>
+  <wsdl:message name="SearchByABNHttpPostIn">
+    <wsdl:part name="abn" type="s:string" />
+    <wsdl:part name="guid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchByABNHttpPostOut">
+    <wsdl:part name="Body" element="tns:SuperFundPayload" />
+  </wsdl:message>
+  <wsdl:portType name="SflXmlSearchSoap">
+    <wsdl:operation name="SearchByABN">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search By ABN e.g. 51835430479</wsdl:documentation>
+      <wsdl:input message="tns:SearchByABNSoapIn" />
+      <wsdl:output message="tns:SearchByABNSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SflXmlSearchHttpGet">
+    <wsdl:operation name="SearchByABN">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search By ABN e.g. 51835430479</wsdl:documentation>
+      <wsdl:input message="tns:SearchByABNHttpGetIn" />
+      <wsdl:output message="tns:SearchByABNHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SflXmlSearchHttpPost">
+    <wsdl:operation name="SearchByABN">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Search By ABN e.g. 51835430479</wsdl:documentation>
+      <wsdl:input message="tns:SearchByABNHttpPostIn" />
+      <wsdl:output message="tns:SearchByABNHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SflXmlSearchSoap" type="tns:SflXmlSearchSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchByABN">
+      <soap:operation soapAction="http://superfundlookup.gov.au/SearchByABN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SflXmlSearchSoap12" type="tns:SflXmlSearchSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SearchByABN">
+      <soap12:operation soapAction="http://superfundlookup.gov.au/SearchByABN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SflXmlSearchHttpGet" type="tns:SflXmlSearchHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SearchByABN">
+      <http:operation location="/SearchByABN" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SflXmlSearchHttpPost" type="tns:SflXmlSearchHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SearchByABN">
+      <http:operation location="/SearchByABN" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SflXmlSearch">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Super Fund Lookup search service</wsdl:documentation>
+    <wsdl:port name="SflXmlSearchSoap" binding="tns:SflXmlSearchSoap">
+      <soap:address location="http://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SflXmlSearchSoap12" binding="tns:SflXmlSearchSoap12">
+      <soap12:address location="http://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SflXmlSearchHttpGet" binding="tns:SflXmlSearchHttpGet">
+      <http:address location="http://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SflXmlSearchHttpPost" binding="tns:SflXmlSearchHttpPost">
+      <http:address location="http://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
