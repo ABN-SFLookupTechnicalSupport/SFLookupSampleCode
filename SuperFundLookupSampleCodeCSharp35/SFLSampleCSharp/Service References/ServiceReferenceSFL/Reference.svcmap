@@ -18,10 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx?WSDL " Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx?WSDL " Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SflXmlSearch.wsdl" MetadataType="Wsdl" ID="d2e67617-cb96-4308-bf3c-0cb2ed209286" SourceId="1" SourceUrl="http://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx?WSDL" />
+    <MetadataFile FileName="SflXmlSearch.wsdl" MetadataType="Wsdl" ID="d2e67617-cb96-4308-bf3c-0cb2ed209286" SourceId="1" SourceUrl="https://www.superfundlookup.gov.au/xmlsearch/SflXmlSearch.asmx?WSDL" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
